@@ -36,6 +36,7 @@ var acceptable = []string{
 	"missing access key",                                                   // Ecoflow
 	"eebus not configured",                                                 // EEBus
 	"missing token",                                                        // HomeAssistant
+	"missing host or token - run 'evcc token homewizard'",                  // HomeWizard Battery
 }
 
 func TestTemplates(t *testing.T) {
