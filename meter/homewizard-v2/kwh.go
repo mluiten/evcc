@@ -5,6 +5,7 @@ import (
 
 	"github.com/evcc-io/evcc/api"
 	"github.com/evcc-io/evcc/util"
+	"github.com/go-viper/mapstructure/v2"
 	"github.com/mluiten/evcc-homewizard-v2/device"
 )
 
@@ -23,7 +24,7 @@ func NewHomeWizardKWHFromConfig(common Config, other map[string]any) (api.Meter,
 		Phases: 3,
 	}
 
-	if err := util.DecodeOther(other, &cc); err != nil {
+	if err := mapstructure.WeakDecode(other, &cc); err != nil {
 		return nil, err
 	}
 

@@ -5,7 +5,7 @@ import (
 
 	"github.com/evcc-io/evcc/api"
 	homewizard "github.com/evcc-io/evcc/meter/homewizard-v2"
-	"github.com/evcc-io/evcc/util"
+	"github.com/go-viper/mapstructure/v2"
 )
 
 func init() {
@@ -18,7 +18,8 @@ func NewHomeWizardV2FromConfig(other map[string]any) (api.Meter, error) {
 		Timeout: homewizard.DefaultTimeout,
 	}
 
-	if err := util.DecodeOther(other, &cc); err != nil {
+	// Decode loosely: sub-type specific fields (e.g. phases) are handled by the individual constructors
+	if err := mapstructure.WeakDecode(other, &cc); err != nil {
 		return nil, err
 	}
 

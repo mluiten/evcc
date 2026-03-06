@@ -7,6 +7,7 @@ import (
 	"github.com/evcc-io/evcc/api"
 	"github.com/evcc-io/evcc/util"
 	"github.com/evcc-io/evcc/util/config"
+	"github.com/go-viper/mapstructure/v2"
 	"github.com/mluiten/evcc-homewizard-v2/device"
 )
 
@@ -31,7 +32,7 @@ func NewHomeWizardBatteryFromConfig(common Config, other map[string]any) (api.Me
 		MaxDischarge: device.DefaultMaxDischarge,
 	}
 
-	if err := util.DecodeOther(other, &cc); err != nil {
+	if err := mapstructure.WeakDecode(other, &cc); err != nil {
 		return nil, err
 	}
 
